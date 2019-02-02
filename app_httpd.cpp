@@ -837,7 +837,7 @@ static esp_err_t status_handler(httpd_req_t *req){
 
 static esp_err_t index_handler(httpd_req_t *req){
     httpd_resp_set_type(req, "text/html");
-     Serial.printf("vith REQ gzip= ");
+     Serial.printf("webpage loading");
      
     // httpd_resp_set_hdr(req, "Content-Encoding", "gzip");
     return httpd_resp_send(req, (const char *)INDEX2_HTML, strlen(INDEX2_HTML));
@@ -908,10 +908,10 @@ void startCameraServer(){
     config.server_port += 1;
     config.ctrl_port += 1;
 
-    config.server_port =9601;//vith
+    config.server_port =9601;//stream port + also change this in the html-source in this file
    // config.ctrl_port =8081;
     
-    Serial.printf("Starting stream server on vith port: '%d'\n", config.server_port);
+    Serial.printf("Starting stream server on stream port: '%d'\n", config.server_port);
     if (httpd_start(&stream_httpd, &config) == ESP_OK) {
         httpd_register_uri_handler(stream_httpd, &stream_uri);
     }
